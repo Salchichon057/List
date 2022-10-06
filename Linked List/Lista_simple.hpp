@@ -1,5 +1,4 @@
-#ifndef __LISTA__
-#define __LISTA__
+#pragma once
 #include <functional>
 #include "Nodo.hpp"
 
@@ -27,7 +26,7 @@ ListaSimple<T>::~ListaSimple(){
     Nodo<T>* temporal;
     while (_cabeza != nullptr){
         temporal = _cabeza;
-        _cabeza = _cabeza->_siguiete;
+        _cabeza = _cabeza->_siguiente;
         delete temporal;
         temporal = nullptr;
     }
@@ -43,9 +42,10 @@ void ListaSimple<T>::pushFront(const T& value){
         longitudNodo++;
         return;
     }
-    nuevo_Nodo->_siguiete = _cabeza; // conectando
-    _cabeza = nuevo_Nodo;
+    nuevo_Nodo->_siguiente = _cabeza; // conectando
+    _cabeza = nuevo_Nodo; // Reposicionando
     longitudNodo++;
+    return;
 }
 
 template <typename T>
@@ -54,21 +54,26 @@ void ListaSimple<T>::pushBack(const T& value){
     Nodo<T>* aux = _cabeza;
     if (_cabeza == nullptr) {
         _cabeza = nuevo_Nodo;
+        longitudNodo++;
         return;
     }
-    while (aux->_siguiete != nullptr){
-        aux = aux->_siguiete;
+    while (aux->_siguiente != nullptr){
+        aux = aux->_siguiente;
     }
-    aux->_siguiete = nuevo_Nodo;
+    aux->_siguiente = nuevo_Nodo;
     aux = nullptr;
     longitudNodo++;
     delete aux;
+    return;
 }
 
 template <typename T>
 void ListaSimple<T>::popFront(){
     Nodo<T>* temporal = _cabeza;
-    _cabeza = _cabeza->_siguiete;
+    if (_cabeza == nullptr){
+        return;
+    }
+    _cabeza = _cabeza->_siguiente;
     longitudNodo--;
     delete temporal;
 }
@@ -85,15 +90,15 @@ void ListaSimple<T>::eliminaPosicion(int posicion) {
             Nodo<T>* aux2;
             // Porque ya se había inicializado se pone i = 1
             for (int i = 1; i < posicion; i++) {
-                aux = aux->_siguiete;
+                aux = aux->_siguiente;
             }
-            aux2 = aux->_siguiete;
+            aux2 = aux->_siguiente;
             // actualizar punteros
-            aux->_siguiete = aux2->_siguiete;
+            aux->_siguiente = aux2->_siguiente;
             delete aux2;
             longitudNodo--;
-        }        
-    }       
+        }
+    }
 }
 
 template <typename T>
@@ -104,22 +109,22 @@ void ListaSimple<T>::popBack(){
     if (final == nullptr) {
         return;
     }
-    while (final->_siguiete != nullptr) {
+    while (final->_siguiente != nullptr) {
         aux = final;
-        final = final->_siguiete;
+        final = final->_siguiente;
     }
-    aux->_siguiete = nullptr;
+    aux->_siguiente = nullptr;
     delete final;
     longitudNodo--;
 }
+
 template <typename T>
 void ListaSimple<T>:: display() {
     Nodo<T>* aux = _cabeza;
-    while (aux != nullptr){
+    while (aux != nullptr) {
         std::cout << aux->_dato << " ";
-        aux = aux->_siguiete;
+        aux = aux->_siguiente;
     }
     std::cout << "\nLa longitud del nodo es: " << longitudNodo;
     std::cout << "\n";
 }
-#endif

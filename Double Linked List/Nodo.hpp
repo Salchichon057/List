@@ -1,12 +1,11 @@
-#ifndef __NODO__
-#define __NODO__
+#pragma once
 
 template<typename T>
-struct Nodo
-{
+struct Nodo {
     T _dato;
-    Nodo<T>* _cabeza;
-    Nodo<T>* _cola;
-    Nodo(T dato) : _dato(dato) , _cabeza(nullptr) , _cola(nullptr){}
+    Nodo<T>* _siguiente;
+    Nodo<T>* _atras;
+
+    // Se le inserta un tipo de dato
+    Nodo(T dato) : _dato(dato) , _siguiente(nullptr) , _atras(nullptr){}
 };
-#endif

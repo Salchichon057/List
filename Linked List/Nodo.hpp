@@ -1,13 +1,10 @@
-#ifndef __NODO__
-#define __NODO__
+#pragma once
 #include <iostream>
 
 template <typename T>
 struct Nodo
 {
     T _dato;    
-    Nodo<T>* _siguiete;
-    Nodo(T dato) : _dato(dato) , _siguiete(nullptr){}
+    Nodo<T>* _siguiente;
+    Nodo(T dato) : _dato(dato) , _siguiente(nullptr){}
 };
-
-#endif
