@@ -7,9 +7,10 @@ class ListaSimple
 {
 private:
     Nodo<T>* _cabeza;
+    Nodo<T>* _cola;
     int longitudNodo;
 public:
-    ListaSimple() : _cabeza(nullptr), longitudNodo(0) {}
+    ListaSimple() : _cabeza(nullptr), _cola(nullptr) , longitudNodo(0) {}
     ~ListaSimple ();
 
     void pushFront(const T& value);
@@ -38,7 +39,7 @@ template <typename T>
 void ListaSimple<T>::pushFront(const T& value){
     Nodo<T>* nuevo_Nodo  = new Nodo<T>(value);
     if (_cabeza == nullptr) {
-        _cabeza = nuevo_Nodo;
+        _cabeza = _cola= nuevo_Nodo;
         longitudNodo++;
         return;
     }
@@ -51,19 +52,16 @@ void ListaSimple<T>::pushFront(const T& value){
 template <typename T>
 void ListaSimple<T>::pushBack(const T& value){
     Nodo<T>* nuevo_Nodo  = new Nodo<T>(value);
-    Nodo<T>* aux = _cabeza;
     if (_cabeza == nullptr) {
-        _cabeza = nuevo_Nodo;
+        _cabeza = _cola= nuevo_Nodo;
         longitudNodo++;
         return;
     }
-    while (aux->_siguiente != nullptr){
-        aux = aux->_siguiente;
-    }
-    aux->_siguiente = nuevo_Nodo;
-    aux = nullptr;
+
+    _cola->_siguiente= nuevo_Nodo;
+    nuevo_Nodo->_siguiente = nullptr;
+    _cola = nuevo_Nodo;
     longitudNodo++;
-    delete aux;
     return;
 }
 
@@ -114,6 +112,10 @@ void ListaSimple<T>::popBack(){
         final = final->_siguiente;
     }
     aux->_siguiente = nullptr;
+    _cola = aux;
+    aux = nullptr;
+    final = nullptr;
+    delete aux;
     delete final;
     longitudNodo--;
 }

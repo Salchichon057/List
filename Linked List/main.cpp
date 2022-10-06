@@ -6,13 +6,9 @@ int main(){
     lista.pushBack(6);
     lista.pushBack(7);
     lista.pushBack(2);
-    lista.pushFront(2);
-    lista.pushFront(3);
-    lista.pushFront(4);
-    lista.pushFront(5);
 
     lista.display();
-    lista.popFront();
+    lista.popBack();
     // lista.popBack();
     // lista.popBack();
     // lista.popBack();
