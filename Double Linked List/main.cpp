@@ -3,21 +3,9 @@
 int main(){
     ListaDoble<int> lista;
 
-    lista.pushBack(6);
-    lista.pushBack(7);
-    lista.pushBack(8);
-    lista.pushBack(6);
-    lista.pushBack(7);
-    lista.pushBack(8);
-    lista.pushBack(6);
-    lista.pushBack(7);
-    lista.pushBack(8);
-    lista.pushBack(6);
-    lista.pushBack(7);
-    lista.pushBack(8);
-    lista.pushBack(6);
-    lista.pushBack(7);
-    lista.pushBack(8);
+    lista.pushFront(6);
+    lista.pushFront(7);
+    // lista.pushFront(8);
  
     lista.display();
     lista.~ListaDoble();

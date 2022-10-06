@@ -29,7 +29,11 @@ public:
 };
 
 template <typename T>
-ListaCircularSimple<T>::~ListaCircularSimple(){}
+ListaCircularSimple<T>::~ListaCircularSimple(){
+    while (_cabeza != nullptr) {
+        popBack();
+    }
+}
 
 template <typename T>
 void ListaCircularSimple<T>::pushFront(const T& value){
